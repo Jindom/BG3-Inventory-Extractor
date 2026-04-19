@@ -18,7 +18,7 @@ Extract a full item inventory from any **Baldur's Gate 3** save file (`.lsv`) an
 | Requirement | Details |
 |---|---|
 | **Python** | 3.8 or newer |
-| **Divine.exe** | From [lslib / BG3 ExportTool](https://github.com/Norbyte/lslib/releases). Download the latest release and extract it. |
+| **Divine.exe** | **Already included** in the `divine/` subfolder. No extra download needed. |
 
 > **No additional Python packages are needed** – the script uses only the standard library.
 
@@ -26,24 +26,21 @@ Extract a full item inventory from any **Baldur's Gate 3** save file (`.lsv`) an
 
 ## Setup
 
-1. Download or clone this folder.
-2. Download [ExportTool (lslib)](https://github.com/Norbyte/lslib/releases) and extract it.
-3. Place `Divine.exe` (and its companion DLLs) either:
-   - **Next to `bg3_inventory.py`**, or
-   - **Anywhere in your system PATH**, or
-   - Specify its location with `--divine "path/to/Divine.exe"`.
+1. Download or clone this folder — that's it! `Divine.exe` and all required DLLs are pre-bundled in the `divine/` subfolder.
 
-### Folder layout (recommended)
+### Folder layout
 
 ```
 BG3-Inventory-Extractor/
-├── bg3_inventory.py        ← this script
+├── bg3_inventory.py        ← main script
 ├── README.md               ← you are here
-├── Divine.exe              ← from ExportTool
-├── LSLib.dll               ← (companion DLL)
-├── granny2.dll             ← (companion DLL)
-└── ... other lslib DLLs
+└── divine/                 ← pre-bundled (from lslib ExportTool v1.20.4)
+    ├── Divine.exe
+    ├── LSLib.dll
+    └── ... other DLLs
 ```
+
+> **Advanced:** You can also point to a different `Divine.exe` with `--divine "path/to/Divine.exe"`, or place one next to `bg3_inventory.py`, or add it to your system PATH. The script checks in this order: `--divine` flag → `divine/` subfolder → same directory → PATH.
 
 ---
 

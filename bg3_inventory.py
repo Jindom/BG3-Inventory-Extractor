@@ -62,14 +62,20 @@ SKIP_STATS_LOWER = {
 # ─── Helper functions ────────────────────────────────────────────────────────
 
 def find_divine(hint_path=None):
-    """Locate Divine.exe. Checks: explicit path -> same folder -> PATH."""
+    """Locate Divine.exe. Checks: explicit path -> divine/ subfolder -> same folder -> PATH."""
     if hint_path:
         if os.path.isfile(hint_path):
             return os.path.abspath(hint_path)
         raise FileNotFoundError(f"Divine.exe not found at: {hint_path}")
 
-    # Check same directory as this script
     script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Check bundled divine/ subfolder (pre-packaged)
+    bundled = os.path.join(script_dir, "divine", "Divine.exe")
+    if os.path.isfile(bundled):
+        return bundled
+
+    # Check same directory as this script
     local = os.path.join(script_dir, "Divine.exe")
     if os.path.isfile(local):
         return local
@@ -80,7 +86,7 @@ def find_divine(hint_path=None):
         return found
 
     raise FileNotFoundError(
-        "Cannot find Divine.exe. Place it next to this script or use --divine."
+        "Cannot find Divine.exe. Place it next to this script, in a divine/ subfolder, or use --divine."
     )
 
 
